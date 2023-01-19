@@ -4,15 +4,20 @@
 	import type { Brew } from '../../models/brew';
 	import type { Coffee } from '../../models/coffee';
 	import type { User } from '../../models/user';
+	import { Collections } from '../../static/constants';
 	import { state } from '../../utils';
+	import type { Expand } from './$types';
 
-	let brews: (Brew & { expand: { user: User; coffee: Coffee } }[]) | null;
+	let brews: Array<Brew> | null;
 	let page: number = 1;
 	let limit: number = 10;
 
 	onMount(async () => {
-		brews = await $state.pb.collection('brews').getList(page, limit, { expand: 'user, coffee' })
-			.items;
+		brews = (
+			await $state.pb
+				.collection(Collections.Brews)
+				.getList<Brew>(page, limit, { expand: 'user, coffee' })
+		).items;
 	});
 </script>
 
@@ -24,7 +29,7 @@
 			<h3>{brew.dose}</h3>
 			<p>{brew.grindSetting}</p>
 			<p>{brew.notes}</p>
-			<p>{brew.expand.coffee.name}</p>
+			<p>{brew.expand?.coffee?.name}</p>
 		</div>
 	{/each}
 {/if}

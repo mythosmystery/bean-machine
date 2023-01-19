@@ -1,3 +1,4 @@
+import type { User } from './user'
 
 export interface Coffee {
     id: string
@@ -7,6 +8,11 @@ export interface Coffee {
     roastDate?: Date
     flavorNotes?: string[]
     user: string
+    rating?: number
+    notes?: string
+    expand?: {
+        user?: User
+    }
 }
 
 export type RoastLevel = 'light' | 'medium' | 'dark' | 'espresso'

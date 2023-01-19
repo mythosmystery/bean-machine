@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { User } from '../../models/user';
+	import { Collections } from '../../static/constants';
 	import { state } from '../../utils';
 
 	let username: string;
@@ -9,7 +10,7 @@
 
 	async function login() {
 		loading = true;
-		await $state.pb.collection('users').authWithPassword<User>(username, pass);
+		await $state.pb.collection(Collections.Users).authWithPassword<User>(username, pass);
 		$state.auth = $state.pb.authStore.model;
 		loading = false;
 		document.location.href = '/';
