@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { mapFormData } from '../../utils';
-	import { Button, FormField, TextField } from 'attractions';
 
 	interface IData {
 		name: string;
@@ -15,7 +14,7 @@
 <h1>Add A New Drink!</h1>
 
 <form on:submit|preventDefault={addDrink}>
-	<TextField name="name" placeholder="Drink Name" />
+	<input name="name" placeholder="Drink Name" />
 
-	<Button filled type="submit">Add Drink</Button>
+	<button type="submit">Add Drink</button>
 </form>

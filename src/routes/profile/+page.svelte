@@ -1,12 +1,8 @@
 <script lang="ts">
-	import type { ListResult } from 'pocketbase';
 	import { onMount } from 'svelte';
 	import type { Brew } from '../../models/brew';
-	import type { Coffee } from '../../models/coffee';
-	import type { User } from '../../models/user';
 	import { Collections } from '../../static/constants';
 	import { state } from '../../utils';
-	import type { Expand } from './$types';
 
 	let brews: Array<Brew> | null;
 	let page: number = 1;
@@ -33,13 +29,3 @@
 		</div>
 	{/each}
 {/if}
-
-<style>
-	h2 {
-		color: #809848;
-		margin-top: 3rem;
-		text-align: center;
-		font-size: 3rem;
-		font-weight: 200;
-	}
-</style>
