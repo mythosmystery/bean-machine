@@ -1,6 +1,8 @@
 <script lang="ts">
 	import type { Record } from 'pocketbase';
 	import { state } from '../utils';
+	import { routes } from '../static/constants';
+	import Breadcrumbs from './breadcrumbs.svelte';
 
 	$: loggedIn = $state.auth !== null;
 
@@ -12,16 +14,20 @@
 	}
 </script>
 
-<nav class="flex top-0 h-16 w-full p-6 justify-between">
-	<a href="/home">Home</a>
+<nav class="sticky bg-white flex top-0 h-16 w-full px-10 py-6 justify-between">
+	<Breadcrumbs />
 	{#if loggedIn}
-		<div class="">
-			<img class="h-12 w-12 rounded-full" src={avatarUrl} alt="Avatar" />
-			<h4 class="nav-item">Welcome, {$state.auth?.name}</h4>
-			<a href="/profile">Profile</a>
-			<a href="/" on:click={logout}>Logout</a>
+		<div class="flex flex-row gap-8 items-center justify-center">
+			<img class="h-5 w-5 rounded-full" src={avatarUrl} alt="Avatar" />
+			<a class="text-md text-purple-800 hover:text-purple-400" href="/profile"
+				>{$state.auth?.name}</a
+			>
+			{#each routes as route}
+				<a class="text-md text-purple-800 hover:text-purple-400" href={route.path}>{route.name}</a>
+			{/each}
+			<a class="text-md text-purple-800 hover:text-purple-400" href="/" on:click={logout}>Logout</a>
 		</div>
 	{:else}
-		<a href="/login">Login</a>
+		<a class="text-xl text-purple-800 hover:text-purple-400" href="/login">Login</a>
 	{/if}
 </nav>

@@ -8,6 +8,6 @@
 	margin: 0;
 }
 
-:global(body) {
+body {
 	font-family: 'Raleway', sans-serif;
 }
