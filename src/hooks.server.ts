@@ -1,24 +1,24 @@
 import type { Handle } from '@sveltejs/kit';
-import PocketBase from "pocketbase";
+import ws from 'ws';
+import { DATABASE_URL } from '$env/static/private';
+import { Pool, neonConfig } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-serverless';
+import * as schema from './db/schema';
+import { SvelteKitAuth } from '@auth/sveltekit';
+import GitHub from '@auth/core/providers/github';
 
-export const handle: Handle = async ({event, resolve}) => {
-    event.locals.pb = new PocketBase("https://pb.mythosmystery.gq");
+if (process.env.NODE_ENV !== 'production') neonConfig.webSocketConstructor = ws;
 
-    // load the store data from the request cookie string
-    event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '');
+export const handleDB: Handle = async ({ event, resolve }) => {
+	const pool = new Pool({ connectionString: DATABASE_URL });
+	const db = drizzle(pool, { schema });
+	event.locals.db = db;
+	const response = await resolve(event);
+	// response.headers.append('set-cookie', event.locals.pb.authStore.exportToCookie());
+	pool.end();
+	return response;
+};
 
-    try {
-        // get an up-to-date auth store state by verifying and refreshing the loaded auth model (if any)
-        event.locals.pb.authStore.isValid && await event.locals.pb.collection('users').authRefresh();
-    } catch (_) {
-        // clear the auth store on failed refresh
-        event.locals.pb.authStore.clear();
-    }
-
-    const response = await resolve(event);
-
-    // send back the default 'pb_auth' cookie to the client with the latest store state
-    response.headers.append('set-cookie', event.locals.pb.authStore.exportToCookie());
-
-    return response;
-}
+export const handleAuth = SvelteKitAuth({
+	providers: [GitHub({ clientId: GITHUB_ID, clientSecret: GITHUB_SECRET })]
+});

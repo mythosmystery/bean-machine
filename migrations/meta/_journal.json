@@ -1,0 +1,20 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1687313270905,
+      "tag": "0000_pale_network",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1687313816429,
+      "tag": "0001_superb_nighthawk",
+      "breakpoints": true
+    }
+  ]
+}
