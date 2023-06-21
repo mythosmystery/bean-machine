@@ -9,10 +9,8 @@
 	<Breadcrumbs />
 	{#if loggedIn}
 		<div class="flex flex-row gap-8 items-center justify-center">
-			<img class="h-5 w-5 rounded-full" src='https://placeholder.com/200' alt="Avatar" />
-			<a class="text-md text-purple-800 hover:text-purple-400" href="/profile"
-				>YOUR NAME</a
-			>
+			<img class="h-5 w-5 rounded-full" src="https://placeholder.com/200" alt="Avatar" />
+			<a class="text-md text-purple-800 hover:text-purple-400" href="/profile">YOUR NAME</a>
 			{#each routes as route}
 				<a class="text-md text-purple-800 hover:text-purple-400" href={route.path}>{route.name}</a>
 			{/each}

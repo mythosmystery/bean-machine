@@ -1,61 +1,61 @@
 {
-  "version": "5",
-  "dialect": "pg",
-  "id": "341daf3d-7c00-42ea-a447-13f9eb96b6ff",
-  "prevId": "14d8ec29-7cee-46d5-a799-b88eba1ccf87",
-  "tables": {
-    "users": {
-      "name": "users",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
-        },
-        "username": {
-          "name": "username",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "email": {
-          "name": "email",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "bio": {
-          "name": "bio",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "avatar": {
-          "name": "avatar",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {}
-    }
-  },
-  "enums": {},
-  "schemas": {},
-  "_meta": {
-    "schemas": {},
-    "tables": {},
-    "columns": {}
-  }
+	"version": "5",
+	"dialect": "pg",
+	"id": "341daf3d-7c00-42ea-a447-13f9eb96b6ff",
+	"prevId": "14d8ec29-7cee-46d5-a799-b88eba1ccf87",
+	"tables": {
+		"users": {
+			"name": "users",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "uuid",
+					"primaryKey": true,
+					"notNull": true,
+					"default": "gen_random_uuid()"
+				},
+				"username": {
+					"name": "username",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"email": {
+					"name": "email",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"name": {
+					"name": "name",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"bio": {
+					"name": "bio",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"avatar": {
+					"name": "avatar",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {}
+		}
+	},
+	"enums": {},
+	"schemas": {},
+	"_meta": {
+		"schemas": {},
+		"tables": {},
+		"columns": {}
+	}
 }
