@@ -10,5 +10,6 @@
 			"name": "bean-db",
 			"connectString": "postgres://mythosmystery:IZfwogL9kty2@ep-muddy-union-703623-pooler.us-east-1.aws.neon.tech/neondb"
 		}
-	]
+	],
+	"typescript.tsdk": "node_modules/typescript/lib"
 }

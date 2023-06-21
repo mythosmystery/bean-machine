@@ -1,10 +1,9 @@
 <script lang="ts">
-
+	import { signIn } from '@auth/sveltekit/client';
 	let username: string;
 	let pass: string;
 
 	let loading = false;
-
 </script>
 
 <div class="flex flex-col max-w-md mx-auto mt-36 items-center">
@@ -23,6 +22,7 @@
 	/>
 	<button
 		class="mt-2 bg-purple-500 hover:bg-purple-400 hover:text-gray-300 active:bg-purple-700 active:outline-none outline-offset-2 outline-2 hover:outline-dashed outline-purple-500 py-2 px-8 rounded-md max-w-xl text-white text-xl"
-		disabled={loading}>Login</button
+		disabled={loading}
+		on:click={() => signIn('github')}>Login</button
 	>
 </div>

@@ -1,11 +1,13 @@
 import type { Handle } from '@sveltejs/kit';
 import ws from 'ws';
-import { DATABASE_URL } from '$env/static/private';
+import { AUTH_SECRET, DATABASE_URL, GITHUB_ID, GITHUB_SECRET } from '$env/static/private';
 import { Pool, neonConfig } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-serverless';
 import * as schema from './db/schema';
 import { SvelteKitAuth } from '@auth/sveltekit';
 import GitHub from '@auth/core/providers/github';
+import { sequence } from '@sveltejs/kit/hooks';
+import type { Provider } from '@auth/core/providers';
 
 if (process.env.NODE_ENV !== 'production') neonConfig.webSocketConstructor = ws;
 
@@ -14,11 +16,13 @@ export const handleDB: Handle = async ({ event, resolve }) => {
 	const db = drizzle(pool, { schema });
 	event.locals.db = db;
 	const response = await resolve(event);
-	// response.headers.append('set-cookie', event.locals.pb.authStore.exportToCookie());
 	pool.end();
 	return response;
 };
 
-export const handleAuth = SvelteKitAuth({
-	providers: [GitHub({ clientId: GITHUB_ID, clientSecret: GITHUB_SECRET })]
+export const authHandler = SvelteKitAuth({
+	providers: [GitHub({ clientId: GITHUB_ID, clientSecret: GITHUB_SECRET })] as Provider[],
+	secret: AUTH_SECRET
 });
+
+export const handle: Handle = sequence(authHandler, handleDB);
